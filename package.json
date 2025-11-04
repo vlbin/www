@@ -1,0 +1,19 @@
+{
+  "name": "www",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.10.4",
+    "micromark": "^4.0.2",
+    "micromark-extension-frontmatter": "^2.0.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "server": "react-dom/server"
+  }
+}
