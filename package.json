@@ -4,7 +4,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "bun lib/build.ts",
-		"serve": "bun lib/serve.ts"
+		"serve": "bun lib/serve.ts",
+		"build:css": "bun build ./src/styles/main.css --outdir ./dist/styles --watch"
 	},
 	"devDependencies": {
 		"@types/bun": "latest"

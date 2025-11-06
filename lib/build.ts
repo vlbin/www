@@ -4,8 +4,8 @@ import { rewriteImages } from "./rewrite-images";
 
 const config = (await import("../serving.config")).default;
 
-const { input, output, layout, styles } = config;
-const img_output = `${output}/img`;
+const { input, output, layout, img_dir, layouts } = config;
+const img_output = `${output}/${img_dir}`;
 
 const glob = new Bun.Glob(`**/*.{md,png,jpg,svg,webp}`);
 const files = Array.from(glob.scanSync({ cwd: input }));
@@ -33,22 +33,22 @@ const posts = await Promise.all(
 	)
 );
 
-const engine = new Liquid();
-const layout_content = await Bun.file(layout).text();
+const engine = new Liquid({ extname: ".liquid", layouts });
 
-await Bun.write(`${output}/styles/main.css`, Bun.file(styles));
+const content = engine.renderFileSync("src/pages/index.liquid");
+console.log(content);
 
 await Promise.all(
 	posts.map(async (post) => {
 		const [filename, ...path] = post.filename.split("/").toReversed();
 		const path_str = path.join("/");
 
-		const content = engine.parseAndRenderSync(layout_content, {
+		const content = engine.renderFileSync(layout, {
 			title: post.frontmatter.title,
 			post: post.body,
 		});
 
-		const transformed = rewriteImages(path_str, content);
+		const transformed = rewriteImages(path_str, content, img_dir);
 
 		return Bun.write(`${output}/${path_str}/${filename}.html`, transformed);
 	})

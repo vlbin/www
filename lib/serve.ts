@@ -1,4 +1,3 @@
-// serve.ts
 Bun.serve({
 	port: 5050,
 	async fetch(req) {

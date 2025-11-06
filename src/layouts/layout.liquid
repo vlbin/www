@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
-    {{ post }}
+    <main>
+      {% block -%}
+      {%- endblock %}
+      {{ post }}
+    </main>
   </body>
 </html>

@@ -1,4 +1,8 @@
-export const rewriteImages = (post_path: string, content: string) => {
+export const rewriteImages = (
+	post_path: string,
+	content: string,
+	img_dir: string
+) => {
 	const rewriter = new HTMLRewriter();
 	rewriter.on("img", {
 		element: (image_element) => {
@@ -8,7 +12,7 @@ export const rewriteImages = (post_path: string, content: string) => {
 				.concat(original_src)
 				.replaceAll("/", "-");
 
-			image_element.setAttribute("src", `img/${transformed_src}`);
+			image_element.setAttribute("src", `${img_dir}/${transformed_src}`);
 		},
 	});
 
