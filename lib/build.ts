@@ -1,9 +1,11 @@
 import { convertPost } from "@lib/convert-post";
 import { Liquid } from "liquidjs";
+import { rewriteImages } from "./rewrite-images";
 
 const config = (await import("../serving.config")).default;
 
 const { input, output, layout, styles } = config;
+const img_output = `${output}/img`;
 
 const glob = new Bun.Glob(`**/*.{md,png,jpg,svg,webp}`);
 const files = Array.from(glob.scanSync({ cwd: input }));
@@ -17,7 +19,10 @@ const [post_files, media_files] = files.reduce<[string[], string[]]>(
 );
 
 media_files.forEach((filename) => {
-	Bun.write(`${output}/${filename}`, Bun.file(`${input}/${filename}`));
+	Bun.write(
+		`${img_output}/${filename.replaceAll("/", "-")}`,
+		Bun.file(`${input}/${filename}`)
+	);
 });
 
 const posts = await Promise.all(
@@ -36,16 +41,16 @@ await Bun.write(`${output}/styles/main.css`, Bun.file(styles));
 await Promise.all(
 	posts.map(async (post) => {
 		const [filename, ...path] = post.filename.split("/").toReversed();
+		const path_str = path.join("/");
 
 		const content = engine.parseAndRenderSync(layout_content, {
 			title: post.frontmatter.title,
 			post: post.body,
 		});
 
-		return Bun.write(
-			`${output}/${path.join("/")}/${filename}.html`,
-			content
-		);
+		const transformed = rewriteImages(path_str, content);
+
+		return Bun.write(`${output}/${path_str}/${filename}.html`, transformed);
 	})
 );
 
