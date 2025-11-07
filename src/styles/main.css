@@ -1,6 +1,9 @@
 :root {
 	--col-bg-primary: #ffffff;
 	--col-bg-secondary: #ededed;
+
+	--col-text-primary: #111;
+	--col-text-secondary: #4c4c4c;
 }
 
 * {
@@ -9,6 +12,7 @@
 }
 
 html {
+	font-size: 18px;
 	line-height: 1.5;
 	font-weight: 400;
 	font-style: normal;
@@ -17,13 +21,46 @@ html {
 		"Open Sans", "Helvetica Neue", sans-serif;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
 body {
 	background-color: var(--col-bg-secondary);
 }
 
-main {
-	background-color: var(--col-bg-primary);
-	width: min(100%, 600px);
+.wrapper {
+	display: flex;
+	width: min(100%, 800px);
 	min-height: 100svh;
 	margin: 0 auto;
+	gap: 32px;
+}
+
+main {
+	background-color: var(--col-bg-primary);
+	flex: 1;
+}
+
+aside .posts-section {
+	margin-top: 32px;
+}
+
+aside h2 {
+	font-size: 14px;
+	color: var(--col-text-secondary);
+}
+
+.sidebar-link {
+	text-decoration: none;
+	color: var(--col-text-primary);
+}
+
+.sidebar-link:hover {
+	color: var(--col-text-secondary);
 }

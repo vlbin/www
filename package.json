@@ -3,9 +3,9 @@
 	"module": "index.ts",
 	"type": "module",
 	"scripts": {
-		"build": "bun lib/build.ts",
-		"serve": "bun lib/serve.ts",
-		"build:css": "bun build ./src/styles/main.css --outdir ./dist/styles --watch"
+		"build": "bun lib/scripts/build.ts",
+		"dev": "bun lib/scripts/dev.ts",
+		"serve": "bun lib/serve.ts"
 	},
 	"devDependencies": {
 		"@types/bun": "latest"

@@ -1,5 +1,6 @@
 ---
-title: second post
+title: Second post
+date: 2025-11-07
 ---
 
 # second post

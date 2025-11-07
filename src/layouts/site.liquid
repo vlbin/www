@@ -1,10 +1,25 @@
 {% layout 'html' %}
 
 {% block html %}
-<aside>albinlandgren.com</aside>
+<div class="wrapper">
+  <aside>
+    albinlandgren.com
 
-<main>
-  {% block site %}
-  {% endblock site %}
-</main>
+    <div class="posts-section">
+      <h2>Posts</h2>
+      <div>
+        {% for post in post_data %}
+          <a href="{{ post.slug }}" class="sidebar-link">
+            {{ post.title }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    {% block site %}
+    {% endblock site %}
+  </main>
+</div>
 {% endblock html %}
