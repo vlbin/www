@@ -1,7 +1,9 @@
 export default {
-	input: "posts",
-	output: "dist",
+	posts: {
+		input_dir: "posts",
+		layout: "post",
+	},
+	output_dir: "dist",
 	img_dir: "img",
-	layout: "src/layouts/layout.liquid",
-	layouts: "src/layouts",
+	layouts_dir: "src/layouts",
 };

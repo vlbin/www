@@ -6,13 +6,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
   </head>
   <body>
-    <main>
-      {% block -%}
-      {%- endblock %}
-      {{ post }}
-    </main>
+    {% block html %}
+    {% endblock html %}
   </body>
 </html>

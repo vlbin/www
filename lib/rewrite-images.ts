@@ -12,7 +12,7 @@ export const rewriteImages = (
 				.concat(original_src)
 				.replaceAll("/", "-");
 
-			image_element.setAttribute("src", `${img_dir}/${transformed_src}`);
+			image_element.setAttribute("src", `/${img_dir}/${transformed_src}`);
 		},
 	});
 
