@@ -26,7 +26,7 @@ export const build = async () => {
 
 	media_files.forEach((filename) => {
 		Bun.write(
-			`${img_output_dir}/${filename.replaceAll("/", "-")}`,
+			`${img_output_dir}/${filename}`,
 			Bun.file(`${posts_dir}/${filename}`)
 		);
 	});
@@ -55,6 +55,7 @@ export const build = async () => {
 
 		const content = template_engine.renderFileSync(post_layout_path, {
 			title: post.frontmatter.title,
+			date: new Date(post.frontmatter.date),
 			post: post.body,
 		});
 

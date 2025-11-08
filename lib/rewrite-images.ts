@@ -3,18 +3,23 @@ export const rewriteImages = (
 	content: string,
 	img_dir: string
 ) => {
-	const rewriter = new HTMLRewriter();
-	rewriter.on("img", {
-		element: (image_element) => {
-			const original_src = image_element.getAttribute("src") ?? "";
-			const transformed_src = post_path
-				.concat("/")
-				.concat(original_src)
-				.replaceAll("/", "-");
+	return new HTMLRewriter()
+		.on("img", {
+			element: (image_element) => {
+				const original_src = image_element.getAttribute("src") ?? "";
 
-			image_element.setAttribute("src", `/${img_dir}/${transformed_src}`);
-		},
-	});
+				if (original_src.startsWith("https://")) {
+					return;
+				}
 
-	return rewriter.transform(content);
+				const transformed_src = post_path
+					.concat("/")
+					.concat(original_src);
+				image_element.setAttribute(
+					"src",
+					`/${img_dir}/${transformed_src}`
+				);
+			},
+		})
+		.transform(content);
 };

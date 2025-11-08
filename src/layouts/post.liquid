@@ -1,7 +1,15 @@
 {% layout 'site' %}
 
 {% block site %}
-<article>
-  {{ post }}
+<article class="post">
+  <h1>{{ title }}</h1>
+  <div>
+    <span class="date">
+      {{ date | date: '%B %d, %Y' }}
+    </span>
+  </div>
+  <div class="post-content">
+    {{ post }}
+  </div>
 </article>
 {% endblock site %}

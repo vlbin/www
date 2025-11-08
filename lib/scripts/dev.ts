@@ -10,6 +10,9 @@ const start = () => {
 
 start();
 serve();
+watch("posts", { recursive: true }, (event, filename) => {
+	start();
+});
 watch("src", { recursive: true }, (event, filename) => {
 	start();
 });
